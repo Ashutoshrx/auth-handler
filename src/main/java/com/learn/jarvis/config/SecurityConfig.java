@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -32,15 +32,18 @@ public class SecurityConfig {
   }
 
   /**
+   * 1. daoAuthenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());--->
    * We are taking control from springBoot to create our own AuthenticationProvider where we are not encoding the
    * password.
    * This is the not the best practice but one just for learning purpose.
+   * 2. new BCryptPasswordEncoder(10)--> Since we are encrypting the password with the same encoder while registering
+   * hence, we need to use the same encoder for authenticating as well.
    */
 
   @Bean
   public AuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-    daoAuthenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+    daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder(10));
     daoAuthenticationProvider.setUserDetailsService(userDetailsService);
     return daoAuthenticationProvider;
   }
