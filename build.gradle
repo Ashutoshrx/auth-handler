@@ -23,8 +23,18 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.apache.commons:commons-collections4:4.5.0-M2'
 	compileOnly 'org.projectlombok:lombok:1.18.34'
 	annotationProcessor 'org.projectlombok:lombok:1.18.34'
+	// MapStruct
+	compileOnly 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+
+	//Connecting with MongoDB database
+	implementation 'org.springframework.data:spring-data-mongodb:4.3.4'
+//	implementation 'org.mongodb:mongodb-driver-sync:5.2.0'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:3.3.4'
+
 }
 
 tasks.named('test') {

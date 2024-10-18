@@ -1,14 +1,13 @@
 package com.learn.jarvis.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-@AllArgsConstructor
-public class StudentDTO {
-  private Integer id;
+public class StudentDTO implements Serializable {
   private String firstName;
   private String lastName;
   private Integer marks;
