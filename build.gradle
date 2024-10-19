@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.apache.commons:commons-collections4:4.5.0-M2'
     compileOnly 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
     // MapStruct
     compileOnly 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.2.0.Final'

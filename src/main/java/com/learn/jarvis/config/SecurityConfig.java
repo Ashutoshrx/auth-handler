@@ -15,12 +15,15 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
   @Autowired
   private UserDetailsService userDetailsService;
+  @Autowired
+  private JwtCustomFilter jwtCustomFilter;
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -32,6 +35,7 @@ public class SecurityConfig {
             .httpBasic(Customizer.withDefaults())// read usernames and passwords from .properties file
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             //An application that doesn't retain information about a user's previous interactions. This is more scalable
+            .addFilterBefore(jwtCustomFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
   }
 
