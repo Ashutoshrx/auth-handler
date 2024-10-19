@@ -18,4 +18,9 @@ public class UserController {
   public UserDTO registerUser(@RequestBody UserDTO userRequest) {
     return userService.registerUser(userRequest);
   }
+
+  @PostMapping("/v1/login")
+  public String verifyAndLogInUser(@RequestBody UserDTO userRequest) {
+    return userService.verifyAndLogInUser(userRequest);
+  }
 }

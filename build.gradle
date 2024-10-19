@@ -29,11 +29,15 @@ dependencies {
 	// MapStruct
 	compileOnly 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.2.0.Final'
-
 	//Connecting with MongoDB database
 	implementation 'org.springframework.data:spring-data-mongodb:4.3.4'
-//	implementation 'org.mongodb:mongodb-driver-sync:5.2.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:3.3.4'
+	//JWT dependencies
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+//	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+
+
 
 }
 

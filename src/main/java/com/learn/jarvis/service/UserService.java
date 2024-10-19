@@ -4,4 +4,6 @@ import com.learn.jarvis.dto.UserDTO;
 
 public interface UserService {
   UserDTO registerUser(UserDTO userRequest);
+
+  String verifyAndLogInUser(UserDTO userRequest);
 }
