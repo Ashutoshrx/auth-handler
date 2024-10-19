@@ -4,6 +4,7 @@ import com.learn.jarvis.data.entity.User;
 import com.learn.jarvis.data.repository.UsersRepository;
 import com.learn.jarvis.dto.UserDTO;
 import com.learn.jarvis.mapper.UserMapper;
+import com.learn.jarvis.service.JWTService;
 import com.learn.jarvis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +25,8 @@ public class UserServiceImpl implements UserService {
   private UserMapper userMapper;
   @Autowired
   private AuthenticationManager authenticationManager;
+  @Autowired
+  private JWTService jwtService;
 
   @Override
   public UserDTO registerUser(UserDTO userRequest) {
@@ -37,6 +40,7 @@ public class UserServiceImpl implements UserService {
   public String verifyAndLogInUser(UserDTO userRequest) {
     Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userRequest.getUserName(),
             userRequest.getPassword()));
-    return authentication.isAuthenticated() ? "Success" : "Failure";
+    return authentication.isAuthenticated() ? jwtService.generateToken(userRequest.getUserName()) :
+            "Failure";
   }
 }
