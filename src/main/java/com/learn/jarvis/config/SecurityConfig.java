@@ -1,5 +1,6 @@
 package com.learn.jarvis.config;
 
+import com.learn.jarvis.enums.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,9 @@ public class SecurityConfig {
     //configuring my own security by taking userName and passwords from application.properties.
     return httpSecurity.csrf(AbstractHttpConfigurer::disable). //disables the default filter chain
             authorizeHttpRequests(requests -> requests.
-            requestMatchers("/user/**").permitAll().// should not authenticate that starts with this URI
+            requestMatchers("/user/**").permitAll()// should not authenticate that starts with this URI
+            .requestMatchers("/admin/**").hasRole(RoleType.ADMIN.getRole()).//admin APIs
+            // needs to authenticated if admin roles are not there
                     anyRequest().authenticated()) // authenticates all requests
             .httpBasic(Customizer.withDefaults())// read usernames and passwords from .properties file
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
